@@ -36,7 +36,9 @@ class MainHandler(tornado.web.RequestHandler):
 
 		# show it up
 		self.render(
-			"index.html"
+			"index.html",
+			title="title",
+			header="header"
 		)
 
 
