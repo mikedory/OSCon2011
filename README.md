@@ -1,3 +1,6 @@
-#hi!
+#Introduction to Tornado
+_by aparrish, brendn and doryexmachina_
 
-This is a readme.  Isn't that exciting?
+This is the demo app we'll be using as an example for our talk at OSCon 2011.
+
+
