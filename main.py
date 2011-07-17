@@ -21,12 +21,10 @@ class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
 			(r"/", MainHandler),
-			(r"/recommended/", RecommendedHandler),
 		]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "templates"),
 			static_path=os.path.join(os.path.dirname(__file__), "static"),
-			ui_modules={"Book": BookModule},
 			debug=True,
 			)
 		tornado.web.Application.__init__(self, handlers, **settings)
@@ -44,10 +42,10 @@ class MainHandler(tornado.web.RequestHandler):
 
 # start it up
 def main():
-		tornado.options.parse_command_line()
-		http_server = tornado.httpserver.HTTPServer(Application())
-		http_server.listen(options.port)
-		tornado.ioloop.IOLoop.instance().start()
+	tornado.options.parse_command_line()
+	http_server = tornado.httpserver.HTTPServer(Application())
+	http_server.listen(options.port)
+	tornado.ioloop.IOLoop.instance().start()
 
 
 if __name__ == "__main__":
