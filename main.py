@@ -1,53 +1,60 @@
-#!/usr/bin/env python
-
-# python basics
-import os.path
-
-# tornado things
-import tornado.auth
-import tornado.escape
-import tornado.httpserver
-import tornado.database
+import tornado.web
 import tornado.ioloop
 import tornado.options
-import tornado.web
-from tornado.options import define, options
+import tornado.httpserver
+import os.path
+import engine
 
-# define Tornado defaults
-define("port", default=8000, help="run on the given port", type=int)
+import logging
 
-# settings
+
+class IndexHandler(tornado.web.RequestHandler):
+	def get(self):
+		self.write('welcome')
+	
+	def post(self):
+		url = self.get_argument('u')
+		shortened = self.application.shortener.add(url)
+		self.write('http://%s/%s' % (self.request.host, shortened))
+
+
+class HashHandler(tornado.web.RequestHandler):
+	def get(self, key):
+		url = self.application.shortener[key]
+		if url:
+			self.set_status(302)
+			self.set_header('Location', url)
+		else:
+			self.set_status(404)
+			self.write('Not found')
+
+
 class Application(tornado.web.Application):
 	def __init__(self):
+		self.shortener = engine.Shortener()
+		
 		handlers = [
-			(r"/", MainHandler),
+			(r'/', IndexHandler),
+			(r'/([A-Za-z0-9-_]{8})', HashHandler)
 		]
-		settings = dict(
-			template_path=os.path.join(os.path.dirname(__file__), "templates"),
-			static_path=os.path.join(os.path.dirname(__file__), "static"),
-			debug=True,
-			)
+		
+		settings = {
+			"static_path": os.path.join(os.path.dirname(__file__), "static"),
+			"template_path": os.path.join(os.path.dirname(__file__), "templates"),
+		}
+		
 		tornado.web.Application.__init__(self, handlers, **settings)
 
-
-# handle the main page
-class MainHandler(tornado.web.RequestHandler):
-	def get(self):
-
-		# show it up
-		self.render(
-			"index.html",
-			title="title"
-		)
-
-
-# start it up
-def main():
-	tornado.options.parse_command_line()
-	http_server = tornado.httpserver.HTTPServer(Application())
-	http_server.listen(options.port)
-	tornado.ioloop.IOLoop.instance().start()
-
-
 if __name__ == "__main__":
-		main()
+	tornado.options.define("port", default=8000, help="listen port", type=int)
+	tornado.options.define("address", default=None, help="listen address", type=str)
+	tornado.options.parse_command_line()
+	
+	server = tornado.httpserver.HTTPServer(Application())
+	
+	if tornado.options.options.address:
+		server.listen(tornado.options.options.port, tornado.options.options.address)
+	else:
+		server.listen(tornado.options.options.port)
+	
+	tornado.ioloop.IOLoop.instance().start()
