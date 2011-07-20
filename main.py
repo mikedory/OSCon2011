@@ -5,12 +5,10 @@ import tornado.httpserver
 import os.path
 import engine
 
-import logging
-
 
 class IndexHandler(tornado.web.RequestHandler):
 	def get(self):
-		self.write('welcome')
+		self.write('Hello')
 	
 	def post(self):
 		url = self.get_argument('u')
