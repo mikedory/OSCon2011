@@ -1,4 +1,4 @@
-/* HTML5 ✰ Boilerplate */
+/* HTML5 Boilerplate */
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -62,9 +62,6 @@ input:valid, textarea:valid   {  }
 input:invalid, textarea:invalid { border-radius: 1px; -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red; }
 .no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
-
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
 a:link { -webkit-tap-highlight-color: #FF5E99; }
 button {  width: auto; overflow: visible; }
 .ie7 img { -ms-interpolation-mode: bicubic; }
@@ -81,18 +78,21 @@ a:hover { color: #036; }
  * Author: aparrish, brendn, doryexmachina
  */
 
+body { background: url('/static/img/bg.png'); background-repeat: both; }
+div#container { margin-top: 100px; margin-left: auto; margin-right: auto; padding: 30px; width: 700px; background-color: #FFF; border: 2px solid #DDD; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px; }
 
+div#container div { font: 36px "Andale Mono", Monaco, monospace; text-align: center; }
+input[type="submit"] { padding: 5px 15px; font-weight: bold; letter-spacing: 0.1em; color: #FFF;
+border: 1px solid #70BA27;
+background-color: #70BA27; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;
+-webkit-box-shadow: 0 1px 2px rgb(102,102,102);
+-moz-box-shadow: 0 1px 2px rgb(102,102,102);
+box-shadow: 0 1px 2px rgb(102,102,102);
+text-shadow: 0 -1px 0 rgb(153,153,153);
+}
 
-
-
-
-
-
-
-
-
-
-
+input[type="submit"]:hover { border: 1px solid #68AB24; background-color: #68AB24; }
+input[type="submit"]:active { border: 1px solid #58901E; background-color: #58901E; }
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .hidden { display: none; visibility: hidden; }

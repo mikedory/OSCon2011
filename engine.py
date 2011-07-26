@@ -17,4 +17,9 @@ class Shortener(object):
 		return urlsafe_b64encode(d + chr(u))
 	
 	def __getitem__(self, key):
+		try:
+			digest = urlsafe_b64decode(key)
+		except TypeError as e:
+			return None
+		
 		return self.urlMap.get(urlsafe_b64decode(key), None)
