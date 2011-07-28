@@ -18,8 +18,8 @@ class Shortener(object):
 	
 	def __getitem__(self, key):
 		try:
-			digest = urlsafe_b64decode(key)
+			digest = urlsafe_b64decode(str(key))
 		except TypeError as e:
 			return None
 		
-		return self.urlMap.get(urlsafe_b64decode(key), None)
+		return self.urlMap.get(digest, None)
