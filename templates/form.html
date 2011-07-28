@@ -1,8 +1,22 @@
-{% extends index.html %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ static_url("css/style.css") }}">
+</head>
 
-{% block body %}
-	<form action="/" method="POST">
-		<input type="text" name="u" />
-		<input type="submit" value="Shorten" />
-	</form>
-{% end %}
+<body>
+
+  <div id="container">
+
+    <div id="main" role="main">
+		<form action="/" method="POST">
+			<input type="text" name="u" />
+			<input type="submit" value="Shorten" />
+		</form>
+    </div> <!-- end #main -->
+
+  </div> <!-- end #container -->
+
+</body>
+</html>

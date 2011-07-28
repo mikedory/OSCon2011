@@ -1,5 +1,18 @@
-{% extends index.html %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ static_url("css/style.css") }}">
+</head>
 
-{% block body %}
-	<a href="{{ url }}">{{ url }}</a>
-{% end %}
+<body>
+
+  <div id="container">
+
+    <div id="main" role="main">
+		<a href="{{ url }}">{{ url }}</a>
+    </div> <!-- end #main -->
+
+  </div> <!-- end #container -->
+</body>
+</html>
